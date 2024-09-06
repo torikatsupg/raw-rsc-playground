@@ -6,9 +6,16 @@
 		"build": "tsc -p .",
 		"format": "biome check --write ."
 	},
+	"dependencies": {
+		"react": "^18.3.0-canary-0210f0b08-20230525",
+		"react-dom": "^18.3.0-canary-ea17cc18f-20230807",
+		"react-server-dom-webpack": "^18.3.0-canary-8039e6d0b-20231026"
+	},
 	"devDependencies": {
 		"@biomejs/biome": "1.8.3",
 		"@types/node": "^22.5.3",
+		"@types/react": "^18.3.5",
+		"@types/react-dom": "^18.3.0",
 		"nodemon": "^3.1.4",
 		"ts-node": "^10.9.2",
 		"typescript": "^5.5.4"
