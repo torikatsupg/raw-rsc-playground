@@ -1,20 +1,10 @@
 // @ts-expect-error
 import rsdws from "react-server-dom-webpack/server"
-import { App } from "./App"
+import { App } from "./app/server/App"
+import { bundleConfig as bundlerConfig } from "./app/server/Client"
 
-console.log('index.tsx')
+console.log("index.tsx")
 
 const { renderToPipeableStream } = rsdws
-
-const bundlerConfig = {
-	"src/Clock.tsx": {
-		Clock: {
-			// for webpack
-			id: "Clock.tsx",
-			name: "Clock",
-			chunks: ["pika", "chu"],
-		},
-	},
-}
 
 renderToPipeableStream(<App />, bundlerConfig).pipe(process.stdout)

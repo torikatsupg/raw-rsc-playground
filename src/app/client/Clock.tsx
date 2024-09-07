@@ -1,5 +1,11 @@
 import { useEffect, useState } from "react"
 
+declare global {
+	interface ClientComponents {
+		Clock: {}
+	}
+}
+
 export const Clock = () => {
 	const [time, setTime] = useState("")
 

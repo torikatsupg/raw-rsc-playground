@@ -4,7 +4,7 @@ import ReactDOM from "react-dom/client"
 // @ts-expect-error
 import { createFromFetch } from "react-server-dom-webpack/client"
 import type {} from "react/canary"
-import { Clock } from "./Clock.js"
+import { Clock } from "./app/client/Clock.js"
 
 // @ts-expect-error
 globalThis.__webpack_chunk_load__ = async (chunkId: string) => {
