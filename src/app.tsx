@@ -1,10 +1,11 @@
-import React from "react"
+import { Clock } from "./Clock"
+import { Page } from "./Page"
 
 export const App = () => {
 	return (
-		<div>
-			<h1>React Server Components example</h1>
+		<Page>
 			<p>Hello, world!</p>
-		</div>
+			<Clock />
+		</Page>
 	)
 }

@@ -1,6 +1,6 @@
 // @ts-expect-error
 import rsdws from "react-server-dom-webpack/server"
-import { App } from "./app"
+import { App } from "./App"
 
 const { renderToPipeableStream } = rsdws
 
