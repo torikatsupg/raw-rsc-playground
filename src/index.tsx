@@ -2,12 +2,17 @@
 import rsdws from "react-server-dom-webpack/server"
 import { App } from "./App"
 
+console.log('index.tsx')
+
 const { renderToPipeableStream } = rsdws
 
 const bundlerConfig = {
 	"src/Clock.tsx": {
 		Clock: {
-			pika: "chu",
+			// for webpack
+			id: "Clock.tsx",
+			name: "Clock",
+			chunks: ["pika", "chu"],
 		},
 	},
 }

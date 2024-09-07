@@ -2,9 +2,7 @@
 	"name": "raw-rsc-playground",
 	"version": "1.0.0",
 	"scripts": {
-		"dev": "npm run build && npm run start",
-		"start": "node --conditions react-server ./dist/index.js",
-		"build": "tsc",
+		"dev": "vite",
 		"format": "biome check --write ."
 	},
 	"dependencies": {
@@ -17,6 +15,7 @@
 		"@types/node": "^22.5.3",
 		"@types/react": "^18.3.5",
 		"@types/react-dom": "^18.3.0",
-		"typescript": "^5.5.4"
+		"typescript": "^5.5.4",
+		"vite": "^5.4.3"
 	}
 }
