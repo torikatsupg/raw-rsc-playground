@@ -1,5 +1,5 @@
-import { Page } from "./Page"
 import { Client } from "./Client"
+import { Page } from "./Page"
 
 export const App = () => {
 	return (
