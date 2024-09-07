@@ -51,3 +51,6 @@ test/_.js
 
 # For Mac users
 .DS_Store
+
+# for custom
+dist
