@@ -4,4 +4,12 @@ import { App } from "./App"
 
 const { renderToPipeableStream } = rsdws
 
-renderToPipeableStream(<App />).pipe(process.stdout)
+const bundlerConfig = {
+	"src/Clock.tsx": {
+		Clock: {
+			pika: "chu",
+		},
+	},
+}
+
+renderToPipeableStream(<App />, bundlerConfig).pipe(process.stdout)
