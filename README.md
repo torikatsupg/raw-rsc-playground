@@ -1,6 +1,7 @@
 # RSC Playground (without Next.js)
 
-<video src="docs/movie.mp4" controls="true" height="400px"></video>
+https://github.com/user-attachments/assets/162d38c1-4d87-4505-b8ea-0056cdb0ec2c
+
 
 ## Getting Started
 
