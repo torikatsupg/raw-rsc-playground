@@ -1,9 +1,10 @@
 import { spawn } from "child_process"
-import { createWriteStream } from "fs"
+import http from "http"
 import { PassThrough, Readable } from "stream"
 import { fileURLToPath } from "url"
 import type {} from "react/canary"
 import type { ReadableStream } from "stream/web"
+import { createServer } from "vite"
 
 import ReactDOM from "react-dom/server"
 // @ts-expect-error
@@ -12,6 +13,7 @@ const { createFromReadableStream } = rsdwc
 
 import { use } from "react"
 import { allClientComponents } from "./app/client/clientComponents.js"
+import { LinesStream, MergedStream, RscScriptStream } from "./shared/stream.js"
 
 const render = () => {
 	const rscFile = fileURLToPath(new URL("./rsc.js", import.meta.url).toString())
@@ -26,11 +28,10 @@ globalThis.__webpack_require__ = async () => {
 	return allClientComponents
 }
 
-const renderHTML = async (): Promise<Readable> => {
+const renderHTML = async (): Promise<ReadableStream> => {
 	const [stream1, stream2] = Readable.toWeb(render()).tee()
 
 	const chunk = createFromReadableStream(stream1)
-	const rscData = await readAll(stream2)
 
 	const PageContainer: React.FC = () => {
 		return (
@@ -40,29 +41,48 @@ const renderHTML = async (): Promise<Readable> => {
 				</head>
 				<body>
 					<div id="app">{use(chunk)}</div>
-					<script id="rsc-data" data-data={rscData} />
 				</body>
 			</html>
 		)
 	}
 
-	const htmlStream = ReactDOM.renderToPipeableStream(<PageContainer />, {
-		bootstrapModules: ["src/client.tsx"],
-	}).pipe(new PassThrough())
+	return new Promise((resolve) => {
+		const reactStream = ReactDOM.renderToPipeableStream(<PageContainer />, {
+			bootstrapScriptContent: `
+globalThis.rscData = [];
+`,
+			bootstrapModules: ["src/client.tsx"],
+			onShellReady() {
+				const rscStream = stream2
+					.pipeThrough(new LinesStream())
+					.pipeThrough(new RscScriptStream())
 
-	return htmlStream
+				const htmlStream = new MergedStream(
+					[Readable.toWeb(reactStream.pipe(new PassThrough())), rscStream],
+					0,
+				)
+				resolve(htmlStream)
+			},
+		})
+	})
 }
 
-const readAll = async (stream: ReadableStream<Uint8Array>): Promise<string> => {
-	let result = ""
-	const decoder = new TextDecoder()
-	for await (const chunk of stream) {
-		result += decoder.decode(chunk)
-	}
-	return result
-}
+const vite = await createServer()
 
-renderHTML().then(async (html) => {
-	const file = createWriteStream("./index.html")
-	html.pipe(file)
+const server = http.createServer((req, res) => {
+	vite.middlewares(req, res, () => {
+		renderHTML()
+			.then((html) => {
+				res.writeHead(200, { "Content-Type": "text/html" })
+				Readable.fromWeb(html).pipe(res)
+			})
+			.catch((error) => {
+				console.error(error)
+				res.writeHead(500, { "Content-Type": "text/plain" })
+				res.end(String(error))
+			})
+	})
+})
+server.listen(3000, () => {
+	console.log("Listening on http://localhost:3000")
 })

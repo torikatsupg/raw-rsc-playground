@@ -1,9 +1,12 @@
 import type { ReactNode } from "react"
 
-export const Page = ({ children }: { children: ReactNode }) => {
+export const Page = ({
+	title,
+	children,
+}: { title: string; children: ReactNode }) => {
 	return (
 		<div>
-			<h1>React Server Components example</h1>
+			<h1>{title}</h1>
 			{children}
 		</div>
 	)

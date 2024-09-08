@@ -1,10 +1,8 @@
-import { resolve } from "path"
-import react from "@vitejs/plugin-react"
+import { defineConfig } from "vite"
 
-/** @type {import('vite').UserConfig} */
-export default {
-	plugins: [react()],
+export default defineConfig({
 	server: {
-		port: 3000,
+		middlewareMode: true,
 	},
-}
+	appType: "custom",
+})

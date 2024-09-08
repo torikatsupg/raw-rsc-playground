@@ -2,27 +2,21 @@
 	"name": "raw-rsc-playground",
 	"version": "1.0.0",
 	"type": "module",
+	"main": "index.js",
 	"scripts": {
-		"dev": "npm run build:tsc && npm run build:html && npm run start",
-
-		"format": "biome check --write .",
-		"start": "vite",
-
-		"build:tsc": "tsc",
-		"build:html": "node dist/server.js"
+		"build": "tsc",
+		"start": "DEBUG=vite:* node dist/server.js",
+		"vite": "vite dev",
+		"format": "biome check --write ."
 	},
-	"dependencies": {
+	"devDependencies": {
+		"@biomejs/biome": "1.8.3",
+		"@types/react": "^18.3.5",
+		"@types/react-dom": "^18.3.0",
 		"@vitejs/plugin-react": "^4.3.1",
 		"react": "^18.3.0-canary-0210f0b08-20230525",
 		"react-dom": "^18.3.0-canary-ea17cc18f-20230807",
 		"react-server-dom-webpack": "^18.3.0-canary-8039e6d0b-20231026",
-		"stream": "^0.0.3"
-	},
-	"devDependencies": {
-		"@biomejs/biome": "1.8.3",
-		"@types/node": "^22.5.3",
-		"@types/react": "^18.3.5",
-		"@types/react-dom": "^18.3.0",
 		"typescript": "^5.5.4",
 		"vite": "^5.4.3"
 	}
