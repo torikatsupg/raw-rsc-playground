@@ -1,16 +1,15 @@
 ## Getting STarted
 
-1. build project
+1. build
 ```shell
 npm run build
 ```
 
-2. start backend
+2. run
 ```shell
 npm run start
-```
 
-3. start frontend
-```shell
-npm run dev
+# or
+
+npm run start:dev # with detail log
 ```

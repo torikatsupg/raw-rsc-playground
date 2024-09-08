@@ -5,8 +5,8 @@
 	"main": "index.js",
 	"scripts": {
 		"build": "tsc",
-		"start": "DEBUG=vite:* node dist/server.js",
-		"vite": "vite dev",
+		"start": "node dist/server.js",
+		"start:debug": "DEBUG=vite:* node dist/server.js",
 		"format": "biome check --write ."
 	},
 	"devDependencies": {
