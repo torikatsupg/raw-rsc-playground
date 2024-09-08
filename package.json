@@ -3,10 +3,13 @@
 	"version": "1.0.0",
 	"type": "module",
 	"scripts": {
-		"build": "tsc",
-		"start": "node dist/server.js",
-		"dev": "vite",
-		"format": "biome check --write ."
+		"dev": "npm run build:tsc && npm run build:html && npm run start",
+
+		"format": "biome check --write .",
+		"start": "vite",
+
+		"build:tsc": "tsc",
+		"build:html": "node dist/server.js"
 	},
 	"dependencies": {
 		"@vitejs/plugin-react": "^4.3.1",
