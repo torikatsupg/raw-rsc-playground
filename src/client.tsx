@@ -2,8 +2,8 @@
 import { createFromReadableStream } from "react-server-dom-webpack/client"
 
 import { use } from "react"
-import { createRoot } from "react-dom/client"
-import { Clock } from "./app/client/Clock"
+import { createRoot, hydrateRoot } from "react-dom/client"
+import { allClientComponents } from "./app/client/clientComponents.js"
 
 const app = document.getElementById("app")
 const ssrData = document.getElementById("rsc-data")?.getAttribute("data-data")
@@ -23,10 +23,6 @@ const { readable: ssrDataStream, writable } = new TransformStream<
 	await writer.close()
 })()
 
-const allClientComponents = {
-	Clock,
-} satisfies { [K in keyof ClientComponents]: React.FC<ClientComponents[K]> }
-
 // TODO: to learn `WHATWG Stream`
 const chunk = createFromReadableStream(ssrDataStream)
 
@@ -34,9 +30,8 @@ const chunk = createFromReadableStream(ssrDataStream)
 globalThis.__webpack_require__ = async () => {
 	return allClientComponents
 }
-
 const Container: React.FC = () => {
 	return use(chunk)
 }
 
-createRoot(app).render(<Container />)
+hydrateRoot(app, <Container />)

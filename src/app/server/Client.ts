@@ -1,4 +1,4 @@
-import type { ClientComponent } from "../../shared/registry"
+import type { ClientComponent } from "../../shared/registry.js"
 
 export const Client = new Proxy(
 	{},
@@ -15,7 +15,7 @@ export const Client = new Proxy(
 	[K in keyof ClientComponents]: ClientComponent<K>
 }
 
-export const bundleConfig = {
+export const bundlerConfig = {
 	__mod__: new Proxy(
 		{},
 		{

@@ -1,5 +1,5 @@
-import { Client } from "./Client"
-import { Page } from "./Page"
+import { Client } from "./Client.js"
+import { Page } from "./Page.js"
 
 export const App = () => {
 	return (

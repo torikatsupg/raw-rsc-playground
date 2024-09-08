@@ -54,4 +54,4 @@ test/_.js
 
 # for custom
 dist
-/index.html
+index.html

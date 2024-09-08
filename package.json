@@ -1,9 +1,10 @@
 {
 	"name": "raw-rsc-playground",
 	"version": "1.0.0",
+	"type": "module",
 	"scripts": {
 		"build": "tsc",
-		"start": "node --conditions react-server dist/server.js",
+		"start": "node dist/server.js",
 		"dev": "vite",
 		"format": "biome check --write ."
 	},
