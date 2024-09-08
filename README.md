@@ -1,15 +1,21 @@
-## Getting STarted
+# RSC Playground (without Next.js)
+
+<video src="docs/movie.mp4" controls="true" height="400px"></video>
+
+## Getting Started
 
 1. build
-```shell
-npm run build
-```
+    ```shell
+    npm run build
+    ```
 
-2. run
-```shell
-npm run start
+2. start server
+    ```shell
+    npm run start
 
-# or
+    # or
 
-npm run start:dev # with detail log
-```
+    npm run start:dev # with detail log
+    ```
+
+3. open http://localhost:3000
